@@ -55,23 +55,24 @@
   <div class="card" id="formCard">
     <div class="lang"><a href="/" class="active">DE</a> | <a href="/en/">EN</a></div>
     <h1>CAMBI</h1>
-    <p class="sub">Hinterlassen Sie Ihre Kontaktdaten – wir melden uns per WhatsApp bei Ihnen.</p>
+    <p class="sub">Hinterlassen Sie hier Ihre Kontaktdaten – wir melden uns bei Ihnen.</p>
 
     <form name="cambi-lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="leadForm" novalidate>
       <input type="hidden" name="form-name" value="cambi-lead">
       <input type="hidden" name="subject" value="Neuer CAMBI-Lead">
       <p class="hidden"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
 
-      <label>Ich bin … <span class="req">*</span></label>
+      <label>Was beschreibt Sie am besten? <span class="req">*</span> <span class="opt">(Mehrfachauswahl möglich)</span></label>
       <div class="chips" id="roleChips">
-        <label class="chip"><input type="radio" name="role" value="Content Creator"><span>Content Creator</span></label>
-        <label class="chip"><input type="radio" name="role" value="Fotografie-Enthusiast/in"><span>Fotografie-Enthusiast/in</span></label>
-        <label class="chip"><input type="radio" name="role" value="Privatkunde/-kundin"><span>Privatkunde/-kundin</span></label>
-        <label class="chip"><input type="radio" name="role" value="Unternehmen"><span>Unternehmen</span></label>
-        <label class="chip"><input type="radio" name="role" value="Händler/in"><span>Händler/in</span></label>
-        <label class="chip"><input type="radio" name="role" value="Sonstiges"><span>Sonstiges</span></label>
+        <label class="chip"><input type="checkbox" name="role" value="Konsument/in / Enthusiast/in"><span>Konsument/in / Enthusiast/in</span></label>
+        <label class="chip"><input type="checkbox" name="role" value="Content Creator"><span>Content Creator</span></label>
+        <label class="chip"><input type="checkbox" name="role" value="Medien / Journalist/in"><span>Medien / Journalist/in</span></label>
+        <label class="chip"><input type="checkbox" name="role" value="Händler/in / Distributor"><span>Händler/in / Distributor</span></label>
+        <label class="chip"><input type="checkbox" name="role" value="Guide / Ausbilder/in"><span>Guide / Ausbilder/in</span></label>
+        <label class="chip"><input type="checkbox" name="role" value="Verband / Organisation"><span>Verband / Organisation</span></label>
+        <label class="chip"><input type="checkbox" name="role" value="Sonstiges"><span>Sonstiges</span></label>
       </div>
-      <div class="err" id="roleErr">Bitte wählen Sie eine Option.</div>
+      <div class="err" id="roleErr">Bitte wählen Sie mindestens eine Option.</div>
 
       <label for="name">Name <span class="req">*</span></label>
       <input type="text" id="name" name="name" autocomplete="name" required>
@@ -147,7 +148,7 @@
 
     const v = k => (form.elements[k].value || "").trim();
     let text = "Hallo! Ich interessiere mich für CAMBI.\n\n"
-             + "Ich bin: " + form.querySelector('input[name="role"]:checked').value + "\n"
+             + "Profil: " + [...form.querySelectorAll('input[name="role"]:checked')].map(x => x.value).join(", ") + "\n"
              + "Name: " + v("name") + "\n"
              + "E-Mail: " + v("email");
     if (v("phone")) text += "\nTelefon: " + v("phone");
