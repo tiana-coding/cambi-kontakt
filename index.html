@@ -107,6 +107,9 @@
       </div>
       <div class="hint">1 = schlecht, 5 = ausgezeichnet</div>
 
+      <label for="feedback">Was hat Ihnen am besten gefallen, und was können wir verbessern? <span class="opt">(optional)</span></label>
+      <input type="text" id="feedback" name="feedback" maxlength="300">
+
       <label class="check">
         <input type="checkbox" id="consent" name="consent" value="ja" required>
         <span>Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. <span class="req">*</span></span>
@@ -172,6 +175,7 @@
     if (v("message")) text += "\nNachricht: " + v("message");
     const rating = form.querySelector('input[name="rating"]:checked');
     if (rating) text += "\nBewertung Stand: " + rating.value + "/5";
+    if (v("feedback")) text += "\nFeedback: " + v("feedback");
     const waUrl = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text);
 
     const onNetlify = /netlify\.app$|mediapunkt\.at$/.test(location.hostname);
